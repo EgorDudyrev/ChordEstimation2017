@@ -82,5 +82,3 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
         plt.show()
         
     plt.clf()
-
-plotstft("my_audio_file.wav")

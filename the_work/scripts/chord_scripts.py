@@ -1,7 +1,7 @@
 from scipy import absolute
 import matplotlib.pyplot as plt
 
-
+'''Plotting the spectrogram uing matplotlib'''
 def plot_spectrogram(spectrogram):
     spectrogram = absolute(spectrogram)
     
@@ -13,8 +13,10 @@ def plot_spectrogram(spectrogram):
     plt.xlabel('Frames')
     plt.show()
     
-    
+'''Should map chords to required chord set
+Hasn't been tested. Just copied from someones github'''
 def map_chords(chords, _type='MinMaj'):
+
     #Create Dictionary for MIDI notes
     MIDInote = {'A': 57, 'A#': 58, 'Bb': 58, 'B': 59, 'Cb': 59,'C': 60, 'C#': 61, 'Db': 61,
          'D': 62, 'D#': 63, 'Eb': 63, 'E': 64, 'E#': 65, 'F': 65, 'F#': 66, 'Gb': 66, 
