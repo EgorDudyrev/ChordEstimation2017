@@ -1,8 +1,40 @@
 from scipy import absolute
 import matplotlib.pyplot as plt
 
-'''Plotting the spectrogram uing matplotlib'''
+def format_fname(s, space_replacer='_'):
+    '''Transform string s to the universal type'''
+    s = re.sub(r'\(|\)|\'|,', '', s)
+    s = s.strip(' ')
+    s = re.sub(r' |_', space_replacer, s)
+    s = re.sub(r'&', '_and_', s)
+    s = s.lower()
+    return s
+
+
+def secs_to_string(secs):
+    '''Format durations notation from seconds (e.g. 121.738) to minutes and seconds (e.g. "02:01")'''
+    if type(secs) is str:
+        secs = round(float(secs))
+    m = str(secs//60)
+    m = '0'+m if len(m)==1 else m
+    s = str(secs%60)
+    s = '0'+s if len(s)==1 else s
+    return ':'.join([m,s])
+
+
+def time_delta(real,needed):
+    '''Calculate time difference with time given as "minutes:seconds"'''
+    return string_to_secs(real)-string_to_secs(needed)
+
+
+def string_to_secs(string):
+    '''Format durations notation from minutes and seconds (e.g. "02:01") to seconds (e.g. 121)'''
+    m,s = map(int,string.split(':'))
+    return m*60+s
+
+
 def plot_spectrogram(spectrogram):
+    '''Plotting the spectrogram uing matplotlib'''
     spectrogram = absolute(spectrogram)
     
     plt.figure(figsize=(15, 7.5))
@@ -13,10 +45,10 @@ def plot_spectrogram(spectrogram):
     plt.xlabel('Frames')
     plt.show()
     
-'''Should map chords to required chord set
-Hasn't been tested. Just copied from someones github'''
-def map_chords(chords, _type='MinMaj'):
 
+def map_chords(chords, _type='MinMaj'):
+    '''Should map chords to required chord set
+    Hasn't been tested. Just copied from someones github'''
     #Create Dictionary for MIDI notes
     MIDInote = {'A': 57, 'A#': 58, 'Bb': 58, 'B': 59, 'Cb': 59,'C': 60, 'C#': 61, 'Db': 61,
          'D': 62, 'D#': 63, 'Eb': 63, 'E': 64, 'E#': 65, 'F': 65, 'F#': 66, 'Gb': 66, 
